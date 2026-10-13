@@ -1,0 +1,7 @@
+cache_*.json
+cache_*.json.tmp
+__pycache__/
+settings.json
+translator.log
+build/
+dist/
