@@ -16,7 +16,7 @@ import tkinter as tk
 import mss, pystray, requests
 from PIL import Image, ImageDraw, ImageFont
 
-__version__ = "1.5.0"  # single source of truth: build.py reads it for the exe + installer
+__version__ = "1.0.0"  # single source of truth: build.py reads it for the exe + installer
 APP_NAME = "SnipTranslator"
 FROZEN = getattr(sys, "frozen", False)  # True when running as the built .exe
 HERE = os.path.dirname(os.path.abspath(__file__))

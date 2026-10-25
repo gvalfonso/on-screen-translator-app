@@ -1,0 +1,26 @@
+# Push a tag like v1.0.0 -> builds the installer on GitHub and attaches it to a Release.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pyinstaller
+      - run: choco install innosetup -y --no-progress
+      - run: python build.py
+      - name: Publish release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/SnipTranslator-Setup-*.exe --title "Snip Translator $GITHUB_REF_NAME" --generate-notes
